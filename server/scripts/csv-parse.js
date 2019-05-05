@@ -3,10 +3,11 @@ const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const CsvModel = require('./csv-db.model');
+const config = require('../config');
 
-const sequelize = new Sequelize('appledb', 'root', 'root', {
-    host: 'localhost',
-    port: 3306,
+const sequelize = new Sequelize(config.dbname, config.dbuser, config.dbpwd, {
+    host: config.host,
+    port: config.dbport,
     dialect: 'mysql',
 });
 

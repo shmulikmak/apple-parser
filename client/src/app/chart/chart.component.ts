@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'angular-highcharts';
 import { ApplesDataService } from '../apples-data.service';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-chart',
@@ -27,11 +27,12 @@ showApples() {
             Number(apple.y_position)
           ];
         }))).subscribe((data) => {
-        this.chartOption(data);
+          const appelsNum = data.length;
+          this.chartOption(data, appelsNum);
       });
   }
 
-  chartOption(data) {
+  chartOption(data, appelsNum) {
     this.chart = new Chart({
       chart: {
         type: 'scatter',
@@ -39,7 +40,7 @@ showApples() {
 
       },
       title: {
-        text: 'Apples'
+        text: `${appelsNum} Apples`
       },
       credits: {
         enabled: false

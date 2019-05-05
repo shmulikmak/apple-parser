@@ -1,16 +1,16 @@
 const Sequelize = require('sequelize');
+const config = require('../config');
 
 /**
  * Connect to Sequelize
  */
 class SequelizeConnection {
     connect() {
-        this.SequelizeConnect = new Sequelize('appledb', 'root', 'root', {
-            host: 'localhost',
-            port: 3306,
+        this.SequelizeConnect = new Sequelize(config.dbname, config.dbuser, config.dbpwd, {
+            host: config.host,
+            port: config.dbport,
             dialect: 'mysql',
         });
-
 
         // test connection
         this.SequelizeConnect.authenticate()
