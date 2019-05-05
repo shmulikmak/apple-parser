@@ -1,0 +1,22 @@
+# using node:10 image
+FROM node:10
+
+# Set environment variables
+ARG PORT=8080
+ARG NODE_ENV=production
+
+# Set the work directory
+WORKDIR /var/www/node-app
+
+# Install dependencies
+COPY package.* /var/www/node-app
+COPY package-lock.json /var/www/node-app
+RUN npm install --production
+
+# Add application files
+COPY . /var/www/node-app
+
+# Expose the app port
+EXPOSE $PORT
+
+CMD ["node", "server.js"]
